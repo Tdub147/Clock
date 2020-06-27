@@ -1,0 +1,179 @@
+﻿<Window x:Class="Clock.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:src="clr-namespace:Clock"
+        mc:Ignorable="d"
+        Title="MainWindow" SizeToContent="WidthAndHeight" Background="Transparent" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Topmost="True">
+    <Window.DataContext>
+        <src:ClockConfiguration x:Name="CC"/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="MainHour" TargetType="Rectangle">
+            <Setter Property="Width" Value="4"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Fill" Value="White"/>
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="RadiusX" Value="1"/>
+            <Setter Property="RadiusY" Value="1.5"/>
+        </Style>
+        <Style x:Key="MinorHour" TargetType="Rectangle">
+            <Setter Property="Width" Value="3"/>
+            <Setter Property="Height" Value="6"/>
+            <Setter Property="Fill" Value="White"/>
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value=".5"/>
+            <Setter Property="RadiusX" Value="1"/>
+            <Setter Property="RadiusY" Value="1.5"/>
+        </Style>
+        <Style x:Key="SecondsHand" TargetType="Rectangle">
+            <Setter Property="Width" Value="1"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Fill" Value="Silver"/>
+            <Setter Property="Stroke" Value="LightGray"/>
+            <Setter Property="StrokeThickness" Value=".5"/>
+            <Setter Property="RadiusX" Value="1"/>
+            <Setter Property="RadiusY" Value="7"/>
+        </Style>
+        <Style x:Key="MinutesHand" TargetType="Rectangle">
+            <Setter Property="Width" Value="2"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Fill" Value="Silver"/>
+            <Setter Property="Stroke" Value="LightGray"/>
+            <Setter Property="StrokeThickness" Value=".5"/>
+            <Setter Property="RadiusX" Value="1"/>
+            <Setter Property="RadiusY" Value="3"/>
+        </Style>
+        <Style x:Key="HoursHand" TargetType="Rectangle">
+            <Setter Property="Width" Value="4"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Fill" Value="Silver"/>
+            <Setter Property="Stroke" Value="LightGray"/>
+            <Setter Property="StrokeThickness" Value=".5"/>
+            <Setter Property="RadiusX" Value="1.5"/>
+            <Setter Property="RadiusY" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid ShowGridLines="False" MouseDown="Grid_MouseDown">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Ellipse Grid.RowSpan="2" Grid.ColumnSpan="2" Width="80" Height="80" Fill="White" Opacity=".3"/>
+        <Rectangle x:Name="One" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinorHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="30" CenterX="1.5" CenterY="3"/>
+                    <TranslateTransform X="18.5" Y="-32.04"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Two" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinorHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="60" CenterX="1.5" CenterY="3"/>
+                    <TranslateTransform X="32.04" Y="-18.5"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Three" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MainHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="90" CenterX="2" CenterY="5"/>
+                    <TranslateTransform X="35"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Four" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinorHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="120" CenterX="1.5" CenterY="3"/>
+                    <TranslateTransform X="32.04" Y="18.5"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Five" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinorHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="-30" CenterX="1.5" CenterY="3"/>
+                    <TranslateTransform X="18.5" Y="32.04"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Six" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MainHour}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <Rectangle x:Name="Seven" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinorHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="30" CenterX="1.5" CenterY="3"/>
+                    <TranslateTransform X="-18.5" Y="32.04"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Eight" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinorHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="60" CenterX="1.5" CenterY="3"/>
+                    <TranslateTransform X="-32.04" Y="18.5"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Nine" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MainHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="90" CenterX="2" CenterY="5"/>
+                    <TranslateTransform X="-35"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Ten" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinorHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="120" CenterX="1.5" CenterY="3"/>
+                    <TranslateTransform X="-32.04" Y="-18.5"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Eleven" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinorHour}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="-30" CenterX="1.5" CenterY="3"/>
+                    <TranslateTransform X="-18.5" Y="-32.04"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="Twelve" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MainHour}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Ellipse x:Name="Center" Grid.RowSpan="2" Grid.ColumnSpan="2" Fill="Silver" Stroke="LightGray" StrokeThickness="1" Width="10" Height="10" Panel.ZIndex="100"/>
+        <Rectangle x:Name="SecondsHand" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource SecondsHand}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="-18"/>
+                    <RotateTransform Angle="{Binding SecondsAngle, Mode=OneWay}" CenterX="0.5" CenterY="18"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="MinutesHand" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MinutesHand}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="-14"/>
+                    <RotateTransform  Angle="{Binding MinutesAngle, Mode=OneWay}" CenterX="1" CenterY="14">
+                    </RotateTransform>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="HoursHand" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource HoursHand}">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="-10"/>
+                    <RotateTransform  Angle="{Binding HoursAngle, Mode=OneWay}" CenterX="2" CenterY="10">
+                    </RotateTransform>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+    </Grid>
+</Window>
